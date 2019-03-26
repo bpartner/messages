@@ -1,0 +1,21 @@
+{
+    "name": "bpartner/messages",
+    "description": "API status messages",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexander Zinchenko",
+            "email": "azinchenko@bpartner.com.ua"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bpartner\\": "src/"
+        }
+    }
+}
