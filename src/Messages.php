@@ -59,11 +59,14 @@ class Messages
 
     /**
      * @param $message
+     * @return $this
      */
-    public function setErrorMessage($message) :void
+    public function setErrorMessage($message) :self
     {
         $this->result['message'] = $message;
         $this->result['status'] = self::STATUS_ERROR;
+
+        return $this;
     }
 
     /**
