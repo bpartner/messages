@@ -18,13 +18,15 @@ class Messages
      *
      * @param string $message
      */
-    public function __construct($message = '')
+    private function __construct($message = '')
     {
         $this->setStatus(self::STATUS_SUCCESS);
         $message ? $this->setMessage($message) : $this->setMessage('Record updated.');
     }
 
     /**
+     * Create new message
+     *
      * @param string $message
      *
      * @return Messages
@@ -35,6 +37,8 @@ class Messages
     }
 
     /**
+     * Set new status
+     *
      * @param $status
      *
      * @return $this
@@ -47,6 +51,8 @@ class Messages
     }
 
     /**
+     * Set new message
+     *
      * @param $message
      * @return $this
      */
@@ -58,6 +64,8 @@ class Messages
     }
 
     /**
+     * Set error message
+     *
      * @param $message
      * @return $this
      */
@@ -70,6 +78,8 @@ class Messages
     }
 
     /**
+     * Get message
+     *
      * @return array
      */
     public function get() :array
@@ -78,6 +88,8 @@ class Messages
     }
 
     /**
+     * Check error status in message
+     *
      * @return bool
      */
     public function exception() :bool
@@ -85,6 +97,13 @@ class Messages
         return self::STATUS_ERROR === $this->result['status'];
     }
 
+    /**
+     * Add meta data to message
+     *
+     * @param $value
+     *
+     * @return Messages
+     */
     public function setMeta($value) :self
     {
         $this->result[self::META] = $value;
@@ -93,6 +112,22 @@ class Messages
     }
 
     /**
+     * Add data to root
+     *
+     * @param $value
+     *
+     * @return $this
+     */
+    public function paginate($value)
+    {
+        $this->result = array_merge($this->result, $value);
+
+        return $this;
+    }
+
+    /**
+     * Add response status to Response
+     *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function result()
