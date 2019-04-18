@@ -1,5 +1,8 @@
 <?php
+
 namespace Bpartner;
+
+use Illuminate\Http\Response;
 
 /**
  * Class Messages
@@ -18,20 +21,20 @@ class Messages
      *
      * @param string $message
      */
-    private function __construct($message = '')
+    private function __construct($message = null)
     {
         $this->setStatus(self::STATUS_SUCCESS);
         $message ? $this->setMessage($message) : $this->setMessage('Record updated.');
     }
 
     /**
-     * Create new message
+     * Create new Message object
      *
      * @param string $message
      *
      * @return Messages
      */
-    public static function make($message = '') :Messages
+    public static function make($message = ''): Messages
     {
         return new static($message);
     }
@@ -43,7 +46,7 @@ class Messages
      *
      * @return $this
      */
-    public function setStatus($status) :self
+    public function setStatus($status): self
     {
         $this->result['status'] = $status;
 
@@ -54,9 +57,10 @@ class Messages
      * Set new message
      *
      * @param $message
+     *
      * @return $this
      */
-    public function setMessage($message) :self
+    public function setMessage($message): self
     {
         $this->result['message'] = $message;
 
@@ -67,9 +71,10 @@ class Messages
      * Set error message
      *
      * @param $message
+     *
      * @return $this
      */
-    public function setErrorMessage($message) :self
+    public function setErrorMessage($message): self
     {
         $this->result['message'] = $message;
         $this->result['status'] = self::STATUS_ERROR;
@@ -82,7 +87,7 @@ class Messages
      *
      * @return array
      */
-    public function get() :array
+    public function get(): array
     {
         return $this->result;
     }
@@ -92,7 +97,7 @@ class Messages
      *
      * @return bool
      */
-    public function exception() :bool
+    public function exception(): bool
     {
         return self::STATUS_ERROR === $this->result['status'];
     }
@@ -104,7 +109,7 @@ class Messages
      *
      * @return Messages
      */
-    public function setMeta($value) :self
+    public function setMeta($value): self
     {
         $this->result[self::META] = $value;
 
@@ -112,13 +117,14 @@ class Messages
     }
 
     /**
-     * Add data to root
+     * Add paginate data to root
      *
-     * @param $value
+     * @param array $value
      *
      * @return $this
+     * @deprecated
      */
-    public function paginate($value)
+    public function paginate($value): self
     {
         $this->result = array_merge($this->result, $value);
 
@@ -126,13 +132,29 @@ class Messages
     }
 
     /**
+     * @param $value
+     * @param $name
+     *
+     * @return Messages
+     */
+    public function root($name, $value): self
+    {
+
+        $this->result = array_merge($this->result, [$name => $value]);
+
+        return $this;
+    }
+
+    /**
      * Add response status to Response
+     *
+     * @param $code
      *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function result()
+    public function result($code = 400): Response
     {
-        return $this->exception() ? response($this->get(), 400) : response($this->get());
+        return $this->exception() ? response($this->get(), $code) : response($this->get());
     }
 
 }
