@@ -3,7 +3,7 @@
     "description": "API status messages",
     "type": "library",
     "license": "MIT",
-    "version": "2.0",
+    "version": "2.0.1",
     "authors": [
         {
             "name": "Alexander Zinchenko",
@@ -27,6 +27,9 @@
             "aliases": {
                 "ApiMessage": "Bpartner\\Messages\\Facades\\ApiMessage"
             }
+        },
+        "branch-alias": {
+            "dev-master": "2.0.1"
         }
     }
 }
