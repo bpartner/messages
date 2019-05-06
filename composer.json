@@ -3,6 +3,7 @@
     "description": "API status messages",
     "type": "library",
     "license": "MIT",
+    "version": "2.0",
     "authors": [
         {
             "name": "Alexander Zinchenko",
