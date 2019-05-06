@@ -3,6 +3,7 @@
     "description": "API status messages",
     "type": "library",
     "license": "MIT",
+    "version": "2.0",
     "authors": [
         {
             "name": "Alexander Zinchenko",
@@ -15,7 +16,17 @@
     },
     "autoload": {
         "psr-4": {
-            "Bpartner\\": "src/"
+            "Bpartner\\Messages\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bpartner\\Messages\\MessagesServiceProvider"
+            ],
+            "aliases": {
+                "ApiMessage": "Bpartner\\Messages\\Facade"
+            }
         }
     }
 }
