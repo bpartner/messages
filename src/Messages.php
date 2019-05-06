@@ -72,14 +72,13 @@ class Messages
      * Set error message
      *
      * @param $message
-     * @param integer|null $status_code
      *
      * @return $this
      */
-    public function setErrorMessage($message, $status_code = null): self
+    public function setErrorMessage($message): self
     {
         $this->result['message'] = $message;
-        $this->result['status'] = $status_code ?? self::STATUS_ERROR;
+        $this->result['status'] = self::STATUS_ERROR;
 
         return $this;
     }

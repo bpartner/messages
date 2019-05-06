@@ -3,6 +3,17 @@
 Create messages for API response
 
 ## Changelog
+## 2.1
+*(2019-05-06)*
+
+#### Bugfixes
+* Rollback status code
+
+#### Documentation
+* Change changelog
+
+---
+
 ## 2.0.1
 *(2019-05-06)*
 
