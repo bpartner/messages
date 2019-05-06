@@ -22,10 +22,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Bpartner\\Messages\\MessagesServiceProvider"
+                "Bpartner\\Messages\\Providers\\MessagesServiceProvider"
             ],
             "aliases": {
-                "ApiMessage": "Bpartner\\Messages\\Facade"
+                "ApiMessage": "Bpartner\\Messages\\Facades\\ApiMessage"
             }
         }
     }
