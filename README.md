@@ -32,8 +32,17 @@ Make status message
 
 ```php
    $result = Messages::make();
+   
    or
+   
    $result = Messages::make('Default success message'); 
+   
+   or use facade ApiMessage
+     
+   $result = ApiMessage::setMessage('My message')
+            ->setMeta($data)
+            ->root('version', '1.0')
+            ->get();
 ```
 
 Add metadata to response status message
@@ -41,7 +50,7 @@ Add metadata to response status message
 ```php
     $model = new Model();
     .....
-    $result->addMeta($model);
+    $result->setMeta($model);
 ```
 
 Set Error Message
@@ -56,8 +65,8 @@ Get message
     $result->get();
 ```
 
-Response message in controller with HTTP (200|400) status
+Response message in Controller with HTTP (200|400) status
 
 ```php
-    $result->result();
+    return $result->result();
 ```

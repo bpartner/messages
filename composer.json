@@ -15,7 +15,17 @@
     },
     "autoload": {
         "psr-4": {
-            "Bpartner\\": "src/"
+            "Bpartner\\Messages\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bpartner\\Messages\\MessagesServiceProvider"
+            ],
+            "aliases": {
+                "ApiMessage": "Bpartner\\Messages\\Facade"
+            }
         }
     }
 }

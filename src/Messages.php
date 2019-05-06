@@ -1,7 +1,8 @@
 <?php
 
-namespace Bpartner;
+namespace Bpartner\Messages;
 
+use Bpartner\Messages\DataObject\ResponseData;
 use Illuminate\Http\Response;
 
 /**
@@ -21,7 +22,7 @@ class Messages
      *
      * @param string $message
      */
-    private function __construct($message = null)
+    public function __construct($message = null)
     {
         $this->setStatus(self::STATUS_SUCCESS);
         $message ? $this->setMessage($message) : $this->setMessage('Record updated.');
@@ -34,7 +35,7 @@ class Messages
      *
      * @return Messages
      */
-    public static function make($message = ''): Messages
+    public static function make($message = null): Messages
     {
         return new static($message);
     }
@@ -71,13 +72,14 @@ class Messages
      * Set error message
      *
      * @param $message
+     * @param integer|null $status_code
      *
      * @return $this
      */
-    public function setErrorMessage($message): self
+    public function setErrorMessage($message, $status_code = null): self
     {
         $this->result['message'] = $message;
-        $this->result['status'] = self::STATUS_ERROR;
+        $this->result['status'] = $status_code ?? self::STATUS_ERROR;
 
         return $this;
     }
@@ -99,7 +101,7 @@ class Messages
      */
     public function exception(): bool
     {
-        return self::STATUS_ERROR === $this->result['status'];
+        return self::STATUS_SUCCESS !== $this->result['status'];
     }
 
     /**
@@ -122,7 +124,6 @@ class Messages
      * @param array $value
      *
      * @return $this
-     * @deprecated
      */
     public function paginate($value): self
     {
@@ -157,4 +158,19 @@ class Messages
         return $this->exception() ? response($this->get(), $code) : response($this->get());
     }
 
+    /**
+     * @param ResponseData $param
+     *
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|Response
+     */
+    public function run(ResponseData $param)
+    {
+        !isset($param->error_message) ?: $this->setErrorMessage($param->error_message);
+        !isset($param->message) ?: $this->setMessage($param->message);
+        !isset($param->meta) ?: $this->setMeta($param->meta);
+        !isset($param->paginate) ?: $this->paginate($param->paginate);
+        !isset($param->root_name) ?: $this->root($param->root_name, $param->root_value);
+
+        return $this->result();
+    }
 }
