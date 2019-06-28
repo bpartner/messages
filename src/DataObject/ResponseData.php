@@ -3,7 +3,7 @@
 namespace Bpartner\Messages\DataObject;
 
 /**
- * Class ResponseData
+ * Class ResponseData.
  *
  * @property $root_name
  * @property $root_value
@@ -11,10 +11,6 @@ namespace Bpartner\Messages\DataObject;
  * @property $message
  * @property $error_message
  * @property $paginate
- *
- *
- *
- * @package Bpartner\Messages\DataObject
  */
 class ResponseData
 {

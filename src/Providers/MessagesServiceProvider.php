@@ -2,15 +2,13 @@
 
 namespace Bpartner\Messages\Providers;
 
-
 use Bpartner\Messages\Messages;
 use Illuminate\Support\ServiceProvider;
 
 class MessagesServiceProvider extends ServiceProvider
 {
-
     /**
-     *Register Messages class
+     *Register Messages class.
      */
     public function register(): void
     {
