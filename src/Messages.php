@@ -6,9 +6,7 @@ use Bpartner\Messages\DataObject\ResponseData;
 use Illuminate\Http\Response;
 
 /**
- * Class Messages
- *
- * @package Bpartner
+ * Class Messages.
  */
 class Messages
 {
@@ -29,19 +27,19 @@ class Messages
     }
 
     /**
-     * Create new Message object
+     * Create new Message object.
      *
      * @param string $message
      *
      * @return Messages
      */
-    public static function make($message = null): Messages
+    public static function make($message = null): self
     {
         return new static($message);
     }
 
     /**
-     * Set new status
+     * Set new status.
      *
      * @param $status
      *
@@ -55,7 +53,7 @@ class Messages
     }
 
     /**
-     * Set new message
+     * Set new message.
      *
      * @param $message
      *
@@ -69,7 +67,7 @@ class Messages
     }
 
     /**
-     * Set error message
+     * Set error message.
      *
      * @param $message
      *
@@ -84,7 +82,7 @@ class Messages
     }
 
     /**
-     * Get message
+     * Get message.
      *
      * @return array
      */
@@ -94,7 +92,7 @@ class Messages
     }
 
     /**
-     * Check error status in message
+     * Check error status in message.
      *
      * @return bool
      */
@@ -104,7 +102,7 @@ class Messages
     }
 
     /**
-     * Add meta data to message
+     * Add meta data to message.
      *
      * @param $value
      *
@@ -118,7 +116,7 @@ class Messages
     }
 
     /**
-     * Add paginate data to root
+     * Add paginate data to root.
      *
      * @param array $value
      *
@@ -139,14 +137,13 @@ class Messages
      */
     public function root($name, $value): self
     {
-
         $this->result = array_merge($this->result, [$name => $value]);
 
         return $this;
     }
 
     /**
-     * Add response status to Response
+     * Add response status to Response.
      *
      * @param $code
      *

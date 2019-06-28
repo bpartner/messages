@@ -2,7 +2,6 @@
 
 namespace Bpartner\Messages\Facades;
 
-
 use Bpartner\Messages\Messages;
 use Illuminate\Support\Facades\Facade;
 
